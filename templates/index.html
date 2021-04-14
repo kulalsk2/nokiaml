@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="icon"
+      href="https://www.flaticon.com/svg/vstatic/svg/814/814476.svg?token=exp=1617334636~hmac=796eee6db4d464a4597919ea7cae82bd"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <title>Solar Energy</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Nokia Project</a>
+        <ul id="nav-mobile" class="right">
+          <li><a href="">github</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div style="padding: 20px">
+      <div class="row s12">
+        <h6>
+          Please enter required features to get predicted solar energy output
+        </h6>
+      </div>
+      <form class="col s12" method="POST">
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input id="latitude" type="text" class="validate" />
+            <label for="latitude">latitude</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input id="longitude" type="text" class="validate" />
+            <label for="longitude">longitude</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input id="Visibility" type="text" class="validate" />
+            <label for="Visibility">Visibility</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input id="cloudcoverage" type="text" class="validate" />
+            <label for="cloudcoverage">cloud coverage</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input id="temperature" type="text" class="validate" />
+            <label for="temperature">Temperature</label>
+          </div>
+        </div>
+        <div class="row"></div>
+      </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>
