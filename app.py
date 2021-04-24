@@ -1,5 +1,7 @@
 from flask import Flask,render_template,request
 import pickle
+from flask.helpers import flash
+import requests
 
 model = pickle.load(open('model.pkl','rb'))
 max = [1.0,10.0,28.18,25.02,97.85,24.83,29.87,30.67,40245,2017,12,31]
@@ -12,17 +14,33 @@ def man():
 
 @app.route('/predict',methods=['POST'])
 def home():
-    lat = float(request.form['lat'])
-    long = float(request.form['long'])
-    visibility = float(request.form['visibility'])
-    cloudcoverage = float(request.form['cloudcoverage'])
-    temperature = float(request.form['temperature'])
-    dewpoint = float(request.form['dewpoint'])
-    relativehumidity = float(request.form['relativehumidity'])
-    windspeed = float(request.form['windspeed'])
-    stationpressure = float(request.form['stationpressure'])
-    altimeter = float(request.form['altimeter'])
-    X = list([cloudcoverage,visibility,temperature,dewpoint,relativehumidity,windspeed,stationpressure,altimeter,2017,7,5])
+    cityname = request.form['cityname']
+    print(cityname)
+    urlRapid = "https://community-open-weather-map.p.rapidapi.com/find"
+    querystringRapid = {"q":"london","mode":"null","lon":"0","type":"link, accurate","lat":"0","units":"imperial, metric"}
+    headersRapid = {
+    'x-rapidapi-key': "38dbf9e34dmshbfaff0223d0ac4fp180cc3jsnb22b375a7fad",
+    'x-rapidapi-host': "community-open-weather-map.p.rapidapi.com"
+    }
+    res = requests.request("GET", urlRapid, headers=headersRapid, params=querystringRapid)
+    resFromRapid = res.json()
+    lat = float(resFromRapid['list'][0]['coord']['lat'])
+    long = float(resFromRapid['list'][0]['coord']['lon'])
+    urlWeatherBit = "https://api.weatherbit.io/v2.0/current?lat="+str(lat)+"&lon="+str(long)+"&key=f6bba80d9ad242b4b82bfb54364059ea"
+    res = requests.request("GET", urlWeatherBit)
+    resFromWebit = res.json()
+    visibility = float(resFromWebit['data'][0]['vis'])
+    cloudcoverage = float(resFromWebit['data'][0]['clouds'])
+    temperature = float(resFromWebit['data'][0]['temp'])
+    dewpoint = float(resFromWebit['data'][0]['dewpt'])
+    relativehumidity = float(resFromWebit['data'][0]['rh'])
+    windspeed = float(resFromWebit['data'][0]['wind_spd'])
+    stationpressure = float(resFromWebit['data'][0]['pres'])
+    urlAltitude = "https://maps.googleapis.com/maps/api/elevation/json?locations="+str(lat)+","+str(long)+"&key=AIzaSyBlLBkfaeA_plfPMGkMBZs6TNc-uuHNiek"
+    res = requests.request("GET", urlAltitude)
+    resAltimeter = res.json()
+    altimeter=resAltimeter['results']['elevation']
+    X = list([cloudcoverage,visibility,temperature,dewpoint,relativehumidity,windspeed,stationpressure,30.8,2017,7,5])
     Xmax = [1.0,10.0,28.18,25.02,97.85,24.83,29.87,30.67,2017,12,31]
     Xmin = [0.0,1.15,-16.06,-18.72,21.25,1.03,8.59,29.48,2016,1,1]
     XN= [x-xmn for x, xmn in zip(X, Xmin)]
