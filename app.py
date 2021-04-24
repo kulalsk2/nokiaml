@@ -36,12 +36,12 @@ def getWeatherData(lat,long):
     relativehumidity = float(resFromWebit['data'][0]['rh'])
     windspeed = float(resFromWebit['data'][0]['wind_spd'])
     stationpressure = float(resFromWebit['data'][0]['pres'])
-    urlAltitude = "https://api.open-elevation.com/api/v1/lookup?locations="+str(lat)+","+str(long)+""
+    urlAltitude = "https://api.opentopodata.org/v1/aster30m?locations="+str(lat)+","+str(long)+""  #"https://api.opentopodata.org/v1/eudem25m?locations="+str(lat)+","+str(long)+""
     resAltimeter = requests.request("GET", urlAltitude).json()
     altimeter=float(resAltimeter['results'][0]['elevation'])
     X = [cloudcoverage,visibility,temperature,dewpoint,relativehumidity,windspeed,stationpressure,altimeter,2017,7,5]
     return X
-    
+
 def getCorrectUnit(X):
     X[1] = 1.60934449789 *X[1] #1/0.621371 
     X[5] = 0.44703925898*X[5]   #1/2.23694 
@@ -60,7 +60,9 @@ def home():
     cityname = request.form['cityname']
     lat,long = latandlong(cityname)
     X = getWeatherData(lat,long)
+    print("before :",X)
     X = getCorrectUnit(X)
+    print("after :",X)
     X = list(X)
     Xmax = [1.0,10.0,28.18,25.02,97.85,24.83,29.87,30.67,2017,12,31]
     Xmin = [0.0,1.15,-16.06,-18.72,21.25,1.03,8.59,29.48,2016,1,1]
