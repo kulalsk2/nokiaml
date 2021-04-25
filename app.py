@@ -2,6 +2,7 @@ from flask import Flask,render_template,request
 import pickle
 from flask.helpers import flash
 import requests
+from datetime import date
 
 model = pickle.load(open('model.pkl','rb'))
 max = [1.0,10.0,28.18,25.02,97.85,24.83,29.87,30.67,40245,2017,12,31]
@@ -39,20 +40,27 @@ def getWeatherData(lat,long):
     urlAltitude = "https://api.opentopodata.org/v1/aster30m?locations="+str(lat)+","+str(long)+""  #"https://api.opentopodata.org/v1/eudem25m?locations="+str(lat)+","+str(long)+""
     resAltimeter = requests.request("GET", urlAltitude).json()
     altimeter=float(resAltimeter['results'][0]['elevation'])
-    X = [cloudcoverage,visibility,temperature,dewpoint,relativehumidity,windspeed,stationpressure,altimeter,2017,7,5]
+    todayData = date.today().strftime("%d-%m-%Y")
+    day,month,year = tuple(str(todayData).split('-'))
+    year = int(year)
+    month = int(month)
+    day = int(day)
+    X = [cloudcoverage,visibility,temperature,dewpoint,relativehumidity,windspeed,stationpressure,altimeter,year,month,day]
     return X
 
 def getCorrectUnit(X):
-    X[1] = 1.60934449789 *X[1] #1/0.621371 
-    X[5] = 0.44703925898*X[5]   #1/2.23694 
+    X[0] = X[0]/100
+    X[1] = 0.621371 *X[1] #0.621371 
+    X[5] = 2.23694 *X[5]   #2.23694 
     pmb = X[6]
     hm = X[7]
-    X[6] =  33.8638672536 *X[6] #1/0.02953
+    X[6] = 0.02953 *X[6] #0.02953
     pmbmin0_3 = pmb-0.3
     pmbmin0_3toPower0_190284 = pmbmin0_3**0.190284
     hmBYpmbmin0_3toPower0_190284 = hm/pmbmin0_3toPower0_190284
     rightEq = (1+0.0000842288*hmBYpmbmin0_3toPower0_190284)**5.25530260032
     X[7] = pmbmin0_3*rightEq
+    X[7]= 0.02953*X[7]
     return X
 
 @app.route('/predict',methods=['POST'])
