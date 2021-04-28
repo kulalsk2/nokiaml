@@ -26,7 +26,7 @@ def latandlong(cityname):
     return lat,long
 
 def getWeatherData(lat,long):
-    urlWeatherBit = "https://api.weatherbit.io/v2.0/history/hourly?lat="+str(lat)+"&lon="+str(long)+"&start_date=2021-04-26&end_date=2021-04-27&tz=local&key=f6bba80d9ad242b4b82bfb54364059ea"
+    urlWeatherBit = "https://api.weatherbit.io/v2.0/history/hourly?lat="+str(lat)+"&lon="+str(long)+"&start_date=2021-04-26&end_date=2021-04-27&tz=local&key=c19308a05e44450f805946e96f0743d0"
     res = requests.request("GET", urlWeatherBit)
     resFromWebit = res.json()
     return resFromWebit
@@ -89,9 +89,6 @@ def home():
     print(final)
     output = sum(final)
     return render_template('after.html',data=output)
-
-
-    
 
 if(__name__=="__main__"):
     app.run(debug=True)
