@@ -30,59 +30,18 @@
     <div style="padding: 20px">
       <div class="row s12">
         <h6>
-          Please enter required features to get predicted solar energy output
+          Please enter the city in which you want to calculate solar energy in kWh
         </h6>
+
       </div>
       <form class="col s12" method="POST" action="{{url_for('home')}}">
         <div class="row">
           <div class="input-field col s12 l6">
-            <input id="latitude"  class="active" type="text" name="lat"/>
-            <label for="latitude">latitude</label>
-          </div>
-          <div class="input-field col s12 l6">
-            <input id="longitude"  class="active" type="text" name="long"/>
-            <label for="longitude">longitude</label>
-          </div>
-        <div class="row">
-          <div class="input-field col s12 l6">
-            <input id="cloudcoverage"  class="active" type="text" name="cloudcoverage"/>
-            <label for="cloudcoverage">cloud coverage</label>
-          </div>
-          <div class="input-field col s12 l6">
-            <input id="visibility"  class="active" type="text" name="visibility"/>
-            <label for="visibility">Visibility</label>
+            <input id="cityname"  class="active" type="text" name="cityname"/>
+            <label for="cityname">cityname</label>
           </div>
         </div>
-        <div class="row">
-          <div class="input-field col s12 l6">
-            <input id="temperature"  class="active" type="text" name="temperature" />
-            <label for="temperature">Temperature</label>
-          </div>
-          <div class="input-field col s12 l6">
-            <input id="dewpoint"  class="active" type="text" name="dewpoint" />
-            <label for="dewpoint">Dew Point</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12 l6">
-            <input id="relativehumidity"  class="active" type="text" name="relativehumidity" />
-            <label for="relativehumidity">Relative Humidity</label>
-          </div>
-          <div class="input-field col s12 l6">
-            <input id="windspeed"  class="active" type="text" name="windspeed"/>
-            <label for="windspeed">Wind Speed</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12 l6">
-            <input id="stationpressure"  class="active" type="text" name="stationpressure" />
-            <label for="stationpressure">Station Pressure</label>
-          </div>
-          <div class="input-field col s12 l6">
-            <input id="altimeter"  class="active" type="text" name="altimeter"/>
-            <label for="altimeter">Altimeter</label>
-          </div>
-        </div>
+        
         <div class="row" style="display: flex; justify-content: center; align-items: center;">
           <input type="submit" class="btn" value="predict" ></input>
         </div>
