@@ -26,7 +26,7 @@ def latandlong(cityname):
     return lat,long
 
 def getWeatherData(lat,long):
-    urlWeatherBit = "https://api.weatherbit.io/v2.0/current?lat="+str(lat)+"&lon="+str(long)+"&key=f6bba80d9ad242b4b82bfb54364059ea"
+    urlWeatherBit = "https://api.weatherbit.io/v2.0/history/hourly?lat="+str(lat)+"&lon="+str(long)+"&start_date=2021-04-26&end_date=2021-04-27&tz=local&key=f6bba80d9ad242b4b82bfb54364059ea"
     res = requests.request("GET", urlWeatherBit)
     resFromWebit = res.json()
     visibility = float(resFromWebit['data'][0]['vis'])
