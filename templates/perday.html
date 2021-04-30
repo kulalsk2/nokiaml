@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="static\world.png" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Solar Energy</title>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Nokia Project</a>
+            <ul id="nav-mobile" class="right">
+                <li>
+                    <a href="https://github.com/kulalsk2/nokiaml/" target="_blank">github</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div style="padding: 20px">
+        <div>
+
+        </div>
+        <canvas id="lineChart" width="900" height="400">
+
+        </canvas>
+        <script>
+            var ctx = document.getElementById('lineChart').getContext('2d');
+            var lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: {{time}},
+                    datasets: [{
+                    label: 'Solar Energy output per hour',
+                    data: {{solarOutputPerhours}},
+                    fill:false,
+                    borderColor:'rgb(75,193,192)',
+                    lineTension:0.1
+                
+                  }]
+                },
+                options : {
+                scales: {
+                    y: {
+                        title:{
+                            display:true,
+                            text:'Solar Energy Per hour',
+                            color:'rgb(75,192,192)',
+                            align:'center'
+                        }
+                    },
+                    x: {
+                        title:{
+                            display:true,
+                            text:'hours in a day',
+                            color:'rgb(75,192,192)',
+                            align:'center'
+                        }
+                    }
+                }
+                }
+               
+            })
+        </script>
+
+    </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+
+</html>
