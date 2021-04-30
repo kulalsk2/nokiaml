@@ -4,7 +4,7 @@ from flask.helpers import flash
 import requests
 import time
 from datetime import date
-model = pickle.load(open('regressor.pkl','rb'))
+model = pickle.load(open('regressor1.pkl','rb'))
 
 app = Flask(__name__)
 
@@ -64,8 +64,10 @@ def getCorrectUnit(X):
 
 @app.route('/predict',methods=['POST'])
 def home():
-    cityname = request.form['cityname']
-    lat,long = latandlong(cityname)
+    #cityname = request.form['cityname']
+    #lat,long = latandlong(cityname)
+    lat = float(request.form['lat'])
+    long = float(request.form['long'])
     X = getWeatherData(lat,long)
     X = getCorrectUnit(X)
     print(X)
