@@ -14,7 +14,7 @@
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Nokia Project</a>
+            <a href="http://127.0.0.1:5000/" class="brand-logo">Nokia Project</a>
             <ul id="nav-mobile" class="right">
                 <li>
                     <a href="https://github.com/kulalsk2/nokiaml/" target="_blank">github</a>
@@ -23,13 +23,25 @@
         </div>
     </nav>
     <div style="padding: 20px">
+    
+    
         <div>
-
+            The total energy output at current hour is   {{currTimeprediction}} kW
+        </div>
+        <br>
+        <div>
+            The total energy output per day is equal to  {{solarOutputPerDay}} kW
+        </div>
+        <br>
+        <div>
+            The solar energy produced at different hours in a day is plotted below
         </div>
         <canvas id="lineChart" width="900" height="400">
 
         </canvas>
+        <div style="display: none"> there will be errors in the below code because vscode can't recognice ginger 2 and tples don't format If we format {{time}} will have space which will rise error</div>
         <script>
+            
             var ctx = document.getElementById('lineChart').getContext('2d');
             var lineChart = new Chart(ctx, {
                 type: 'line',
@@ -45,6 +57,7 @@
                   }]
                 },
                 options : {
+                responsive:false,
                 scales: {
                     y: {
                         title:{
@@ -65,7 +78,7 @@
                 }
                 }
                
-            })
+            });
         </script>
 
     </div>

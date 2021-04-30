@@ -16,10 +16,10 @@
   <title>Solar Energy</title>
 </head>
 
-<body>
+<body onload="setMax()">
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Nokia Project</a>
+      <a href="http://127.0.0.1:5000/" class="brand-logo">Nokia Project</a>
       <ul id="nav-mobile" class="right">
         <li>
           <a href="https://github.com/kulalsk2/nokiaml/" target="_blank">github</a>
@@ -47,11 +47,18 @@
         </div>
         <div class="input-field col s12 l6">
           <input id="long" class="active" type="text" name="long" value="77.5655" />
-          <label for="long">longitude</label>
+          <label for="long">longitude </label>
         </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input type="date" id="yesterday" name="yesterday" min="1980-01-01" max="2021-01-01" onchange="beforeDay()" >
+            <label for="yesterday">date</label>
+            
+          </div>
       </div>
+      <input type="date" id="today"  name="today" style="display: none;"></input>
       <div class="row" style="display: flex; justify-content: center; align-items: center;">
-        <input type="submit" class="btn" value="predict"></input>
+        <input type="submit" class="btn" value="perday" ></input>
       </div>
     </form>
   </div>
@@ -87,6 +94,65 @@
     }
 
     mymap.on('click', onMapClick);
+    function setMax(){
+      var today = new Date();
+      console.log(today);
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+      var yyyy = today.getFullYear();
+      if(dd<10){
+        dd='0'+dd
+      } 
+      if(mm<10){
+        mm='0'+mm
+      }
+      today = yyyy+'-'+mm+'-'+dd;
+      document.getElementById("today").value=today;
+      console.log(document.getElementById("today").value)
+      var date = new Date(mm+'/'+dd+'/'+yyyy+' 00:00:00');
+      var yesterday = new Date(date.getTime());
+      yesterday.setDate(date.getDate() - 1);
+      dd = yesterday.getDate();
+      mm = yesterday.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+      yyyy = yesterday.getFullYear();
+      if(dd<10){
+        dd='0'+dd
+      } 
+      if(mm<10){
+        mm='0'+mm
+      }
+      yesterday = yyyy+'-'+mm+'-'+dd;
+
+      console.log(yesterday)
+      document.getElementById("yesterday").setAttribute("max", yesterday);
+    }
+    function beforeDay(){
+      var yesterday = document.getElementById("yesterday").value;
+      console.log(yesterday)
+      var yyyy = yesterday.slice(0,4)
+      var mm = yesterday.slice(5,7)
+      var dd = yesterday.slice(8,)
+
+      console.log(mm+'/'+dd+'/'+yyyy+' 00:00:00')
+      var date = new Date(mm+'/'+dd+'/'+yyyy+' 00:00:00');
+      var yesterday = new Date(date.getTime());
+      yesterday.setDate(date.getDate() - 1);
+      dd = yesterday.getDate();
+      mm = yesterday.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+      yyyy = yesterday.getFullYear();
+      if(dd<10){
+        dd='0'+dd
+      } 
+      if(mm<10){
+        mm='0'+mm
+      }
+      console.log(mm+'/'+dd+'/'+yyyy+' 00:00:00')
+      today = yyyy+'-'+mm+'-'+dd;
+      
+      document.getElementById("today").value=today;
+      console.log(document.getElementById("today").value)
+    }
+    
   </script>
 </body>
 
