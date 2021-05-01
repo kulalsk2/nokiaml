@@ -17,7 +17,6 @@ def getCorrectUnitPerDay(X):
     
 def getWeatherDataForPerDay(lat,long,yesterday,today):
     
-    print("2021-04-29","2021-04-30")
     urlWeatherBit = "https://api.weatherbit.io/v2.0/history/hourly?lat="+str(lat)+"&lon="+str(long)+"&start_date="+str(today)+"&end_date="+str(yesterday)+"&tz=local&key=c19308a05e44450f805946e96f0743d0"
     res = requests.request("GET", urlWeatherBit)
     resFromWebit = res.json()

@@ -96,7 +96,6 @@
     mymap.on('click', onMapClick);
     function setMax(){
       var today = new Date();
-      console.log(today);
       var dd = today.getDate();
       var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
       var yyyy = today.getFullYear();
@@ -108,7 +107,6 @@
       }
       today = yyyy+'-'+mm+'-'+dd;
       document.getElementById("today").value=today;
-      console.log(document.getElementById("today").value)
       var date = new Date(mm+'/'+dd+'/'+yyyy+' 00:00:00');
       var yesterday = new Date(date.getTime());
       yesterday.setDate(date.getDate() - 1);
@@ -123,17 +121,14 @@
       }
       yesterday = yyyy+'-'+mm+'-'+dd;
 
-      console.log(yesterday)
       document.getElementById("yesterday").setAttribute("max", yesterday);
     }
     function beforeDay(){
       var yesterday = document.getElementById("yesterday").value;
-      console.log(yesterday)
       var yyyy = yesterday.slice(0,4)
       var mm = yesterday.slice(5,7)
       var dd = yesterday.slice(8,)
 
-      console.log(mm+'/'+dd+'/'+yyyy+' 00:00:00')
       var date = new Date(mm+'/'+dd+'/'+yyyy+' 00:00:00');
       var yesterday = new Date(date.getTime());
       yesterday.setDate(date.getDate() - 1);
@@ -146,11 +141,9 @@
       if(mm<10){
         mm='0'+mm
       }
-      console.log(mm+'/'+dd+'/'+yyyy+' 00:00:00')
       today = yyyy+'-'+mm+'-'+dd;
       
       document.getElementById("today").value=today;
-      console.log(document.getElementById("today").value)
     }
     
   </script>

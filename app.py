@@ -19,7 +19,6 @@ def getPerDayChart(lat,long,yesterday,today):
     for i in range(0,24):
         X = perday.refinedDataForPerDay(resFromWebit, i)
         X.append(altimeter)
-        print(X)
         X = perday.getCorrectUnitPerDay(X)
         if (X[0]>=0 and X[0]<=5) or (X[0]>=18 and X[0]<=24):
                 solarOutputPerhours.append(0)
@@ -31,7 +30,6 @@ def getPerDayChart(lat,long,yesterday,today):
         pred = model.predict(X)
         solarOutputPerhours.append(pred[0])
         X = []
-    print(solarOutputPerhours)
     solarOutputPerDay = sum(solarOutputPerhours)
     return solarOutputPerhours,time,solarOutputPerDay
 
