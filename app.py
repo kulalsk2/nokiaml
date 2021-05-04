@@ -53,8 +53,5 @@ def home():
     pred = model.predict(X)
     return  render_template('perday.html',currTimeprediction = pred[0],solarOutputPerhours=solarOutputPerhours,time=times,solarOutputPerDay=solarOutputPerDay)
 
-
-    
-
 if(__name__=="__main__"):
     app.run(debug=True)
